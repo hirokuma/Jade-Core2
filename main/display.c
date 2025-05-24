@@ -184,7 +184,7 @@ void display_fill_rect(int x, int y, int w, int h, color_t color)
         JADE_LOGE(
             "display_fill_rect called with bad params (ignored) x %d y %d w %d h %d color %u\n", x, y, w, h, color);
 #if !defined(CONFIG_BOARD_TYPE_M5_CORES3) && !defined(CONFIG_BOARD_TYPE_TTGO_TWATCHS3)                                 \
-    && !defined(CONFIG_BOARD_TYPE_WS_TOUCH_LCD2)
+    && !defined(CONFIG_BOARD_TYPE_WS_TOUCH_LCD2) && !defined(CONFIG_BOARD_TYPE_M5_CORE2)
         return;
 #endif
     }
