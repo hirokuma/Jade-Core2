@@ -40,7 +40,12 @@ esp_err_t _i2c_init_master(
         .glitch_ignore_cnt = 7,
         .flags.enable_internal_pullup = true,
     };
-    I2C_CHECK_RET(i2c_new_master_bus(&master_bus_config, handle));
+    int ret = i2c_new_master_bus(&master_bus_config, handle);
+    if (ret == ESP_ERR_INVALID_STATE) {
+        *handle = master_bus_handle;
+        ret = ESP_OK;
+    }
+    I2C_CHECK_RET(ret);
 
     return ESP_OK;
 }
