@@ -1,7 +1,6 @@
 pins
 pinsdir
 build
-sdkconfig
 sdkconfig.defaults
 sdkconfig.old
 *.pin
@@ -15,3 +14,4 @@ managed_components/
 dist/
 jade_client.egg-info/
 docs/_build/
+.vscode/
