@@ -1,4 +1,5 @@
 #include "gui.h"
+#include "power.h"
 #include "jade_assert.h"
 #include "jade_tasks.h"
 
@@ -80,10 +81,13 @@ static void touchscreen_task(void* ignored)
                     const uint16_t middle_thirds_end = (CONFIG_DISPLAY_WIDTH * 2) / 3;
                     if (touch_y[0] > 200) {
                         if (touch_x[0] <= first_third_end) {
+                            power_vibrattion(100);
                             gui_prev();
                         } else if (touch_x[0] > first_third_end && touch_x[0] < middle_thirds_end) {
+                            power_vibrattion(100);
                             gui_front_click();
                         } else if (touch_x[0] >= middle_thirds_end) {
+                            power_vibrattion(100);
                             gui_next();
                         } else {
                             continue;
