@@ -64,6 +64,7 @@ static void touchscreen_task(void* ignored)
     uint16_t touch_y[1];
     uint16_t touch_strength[1];
     uint8_t touch_cnt = 10;
+    bool pressing = false;
 
     // FIXME: don't allow multiple touches within 300 ms?
     // FIXME: this doesn't currently work with Display -> Flip Orientation feature
@@ -73,20 +74,25 @@ static void touchscreen_task(void* ignored)
             bool touchpad_pressed
                 = esp_lcd_touch_get_coordinates(ret_touch, touch_x, touch_y, touch_strength, &touch_cnt, 1);
             if (touchpad_pressed) {
-                const uint16_t first_third_end = CONFIG_DISPLAY_WIDTH / 3;
-                const uint16_t middle_thirds_end = (CONFIG_DISPLAY_WIDTH * 2) / 3;
-                if (touch_y[0] > 200) {
-                    if (touch_x[0] <= first_third_end) {
-                        gui_prev();
-                    } else if (touch_x[0] > first_third_end && touch_x[0] < middle_thirds_end) {
-                        gui_front_click();
-                    } else if (touch_x[0] >= middle_thirds_end) {
-                        gui_next();
-                    } else {
-                        continue;
+                if (!pressing) {
+                    pressing = true;
+                    const uint16_t first_third_end = CONFIG_DISPLAY_WIDTH / 3;
+                    const uint16_t middle_thirds_end = (CONFIG_DISPLAY_WIDTH * 2) / 3;
+                    if (touch_y[0] > 200) {
+                        if (touch_x[0] <= first_third_end) {
+                            gui_prev();
+                        } else if (touch_x[0] > first_third_end && touch_x[0] < middle_thirds_end) {
+                            gui_front_click();
+                        } else if (touch_x[0] >= middle_thirds_end) {
+                            gui_next();
+                        } else {
+                            continue;
+                        }
+                        vTaskDelay(100 / portTICK_PERIOD_MS);
                     }
-                    vTaskDelay(100 / portTICK_PERIOD_MS);
                 }
+            } else {
+                pressing = false;
             }
         }
         vTaskDelay(20 / portTICK_PERIOD_MS);
