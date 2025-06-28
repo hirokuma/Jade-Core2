@@ -11,12 +11,15 @@
 #include "power/jadev11.inc"
 #elif defined(CONFIG_BOARD_TYPE_JADE_V2)
 #include "power/jadev20.inc"
-#elif defined(CONFIG_BOARD_TYPE_M5_STICKC_PLUS) || defined(CONFIG_BOARD_TYPE_M5_CORE2)
+#elif defined(CONFIG_BOARD_TYPE_M5_STICKC_PLUS)
 // These have AXP192 but configured differently from the Jade
 #include "power/m5stickcplus.inc"
 #elif defined(CONFIG_BOARD_TYPE_M5_STICKC_PLUS_2)
 // Board with IP5303 Power PMU
 #include "power/m5stickcplus2.inc"
+#elif defined(CONFIG_BOARD_TYPE_M5_CORE2)
+// These have AXP192 for M5Stack Core2
+#include "power/m5stackcore2.inc"
 #elif defined(CONFIG_BOARD_TYPE_M5_CORES3)
 // M5 Core S3 has AXP2101
 #include "power/m5stackcores3.inc"

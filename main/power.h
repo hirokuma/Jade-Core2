@@ -38,4 +38,10 @@ void enable_usb_host(void);
 void disable_usb_host(void);
 #endif
 
+#ifdef CONFIG_BOARD_TYPE_M5_CORE2
+void power_vibrattion(uint16_t duration_ms);
+#else // CONFIG_BOARD_TYPE_M5_CORE2
+#define power_vibrattion(a) ;
+#endif // CONFIG_BOARD_TYPE_M5_CORE2
+
 #endif /* POWER_H_ */

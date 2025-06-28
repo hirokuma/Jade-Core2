@@ -1938,9 +1938,10 @@ static void render_text(gui_view_node_t* node, dispWin_t cs)
                     offset_x = 0;
                 }
 
-                _fg = node->text->noise->background_color;
-                buf[0] = 0x61 + get_uniform_random_byte(0x7a - 0x61);
-                display_print_in_area(buf, pos_x + offset_x, pos_y + offset_y, cs, 1);
+                // FIXME: Commented out temporarily as a workaround for M5Core2
+                // _fg = node->text->noise->background_color;
+                // buf[0] = 0x61 + get_uniform_random_byte(0x7a - 0x61);
+                // display_print_in_area(buf, pos_x + offset_x, pos_y + offset_y, cs, 1);
                 _fg = color;
                 buf[0] = node->render_data.resolved_text[i];
                 display_print_in_area(buf, pos_x + offset_x, pos_y + offset_y, cs, 1);
